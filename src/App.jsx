@@ -7,13 +7,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta pública */}
+        {/*Ruta pública*/}
         <Route path="/login" element={<Login />} />
-        {/* Rutas privadas: todas las que estén dentro de ProtectedRoute */}
+        {/*Rutas privadas: todas las que estén dentro de ProtectedRoute*/}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-        {/* Cualquier otra ruta -> dashboard (o login si no hay sesión) */}
+        {/*Cualquier otra ruta -> dashboard (o login si no hay sesión)*/}
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>

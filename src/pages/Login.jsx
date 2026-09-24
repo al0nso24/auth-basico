@@ -8,19 +8,23 @@ export default function Login() {
     const location = useLocation()
     const [usuario, setUsuario] = useState('')
     const [clave, setClave] = useState('')
-    const [error, setError] = useState('')
-    const destino = location.state?.from?.pathname || '/dashboard'
+    const [error, setError] = useState('') //mensaje de error
+
+    //location.state.from.pathname = la ruta que quería abrir antes de entrar al login
+    const destino = location.state?.from?.pathname || '/dashboard' //detecta de dónde vino el usuario
     
-    // Si ya inició sesión, no tiene sentido mostrar el login
+    //Si ya inició sesión, no tiene sentido mostrar el login
     if (isAuthenticated) return <Navigate to={destino} replace />
+
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault() //evita que el formulario recargue la página
         if (login(usuario, clave)) {
             navigate(destino, { replace: true })
         } else {
             setError('Usuario o contraseña incorrectos')
         }
     }
+
     return (
         <div className="login-page">
             <form className="card" onSubmit={handleSubmit}>
@@ -31,8 +35,7 @@ export default function Login() {
                 </label>
                 <label>
                     Contraseña
-                    <input type="password" value={clave}
-                        onChange={(e) => setClave(e.target.value)} required />
+                    <input type="password" value={clave} onChange={(e) => setClave(e.target.value)} required />
                 </label>
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Ingresar</button>
